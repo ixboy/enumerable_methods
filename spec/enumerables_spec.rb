@@ -29,7 +29,7 @@ RSpec.describe '#my_each' do
     returned = array.my_each {}
     expect(returned).to be(array)
   end
-  it 'returns an array with all the elements in range' do
+  it 'returns the range itself when block given' do
     range = (1..10)
     returned = range.my_each {}
     expect(returned).to be(range)
@@ -69,7 +69,7 @@ RSpec.describe '#my_each_with_index' do
     returned = array.my_each_with_index {}
     expect(returned).to be(array)
   end
-  it 'returns an array with all the elements in range' do
+  it 'returns the range itself when block given' do
     range = (1..10)
     returned = range.my_each_with_index {}
     expect(returned).to be(range)
