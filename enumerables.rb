@@ -38,6 +38,10 @@ module Enumerable
       my_each do |item|
         return false unless yield(item)
       end
+    elsif pattern.is_a?(Class)
+      my_each do |item|
+        return false unless item.is_a?(pattern)
+      end
     elsif pattern.is_a?(Regexp)
       my_each do |item|
         return false unless pattern.match?(item)
@@ -46,3 +50,5 @@ module Enumerable
     true
   end
 end
+
+# puts 'hello'.is_a?(String)

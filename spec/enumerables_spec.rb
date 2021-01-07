@@ -97,10 +97,10 @@ RSpec.describe '#my_all?' do
     expect([true, true, 1, 2, 3, 4, 'hello'].all?).to be(true)
   end
   it 'returns true with class argument and all elements are members' do
-    expect([1, 2, 3, 4, 5, 6].all?(Integer)).to be(true)
-    expect([1, 2.0, 3, 4, 5, 6].all?(Integer)).to be(false)
-    expect(%w[a b c d e f g].all?(String)).to be(true)
-    expect(['a', 'b', 1, 'c', 'd'].all?(String)).to be(false)
+    expect([1, 2, 3, 4, 5, 6].my_all?(Integer)).to be(true)
+    expect([1, 2.0, 3, 4, 5, 6].my_all?(Integer)).to be(false)
+    expect(%w[a b c d e f g].my_all?(String)).to be(true)
+    expect(['a', 'b', 1, 'c', 'd'].my_all?(String)).to be(false)
   end
   it 'returns true when all elements match the regex' do
     array = %w[one two three four five six seven]
