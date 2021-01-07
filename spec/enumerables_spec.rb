@@ -75,3 +75,12 @@ RSpec.describe '#my_each_with_index' do
     expect(returned).to be(range)
   end
 end
+
+RSpec.describe '#my_select' do
+  it 'it filters the selected item in the array' do
+    fruits = %w[mango banana apple orange]
+    expected = 'mango'
+    favorites = fruits.select { |fruit| fruit == expected }
+    expect(favorites).to eq([expected])
+  end
+end
