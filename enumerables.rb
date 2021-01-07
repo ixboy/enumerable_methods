@@ -74,6 +74,27 @@ module Enumerable
     end
     false
   end
+
+  def my_none?(pattern = nil)
+    if pattern.nil?
+      my_each do |item|
+        if block_given?
+          return false if yield(item)
+        elsif item
+          return false
+        end
+      end
+    elsif pattern.is_a?(Class)
+      my_each do |item|
+        return false if item.is_a?(pattern)
+      end
+    elsif pattern.is_a?(Regexp)
+      my_each do |item|
+        return false if pattern.match?(item)
+      end
+    end
+    true
+  end
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 end

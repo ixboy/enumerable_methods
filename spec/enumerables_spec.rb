@@ -146,27 +146,27 @@ end
 
 RSpec.describe '#my_none?' do
   it 'returns true with no block and no truthy elements' do
-    expect([true, true, nil, true, true].none?).to be(false)
-    expect([false, nil, false, false].none?).to be(true)
-    expect([true, true, 1, 2, 3, 4, 'hello'].none?).to be(false)
+    expect([true, true, nil, true, true].my_none?).to be(false)
+    expect([false, nil, false, false].my_none?).to be(true)
+    expect([true, true, 1, 2, 3, 4, 'hello'].my_none?).to be(false)
   end
   it 'returns true with class argument and no elements are members' do
-    expect([1, 2, 3.7, 4.8, 5, 6].none?(Integer)).to be(false)
-    expect([2.0, 3.1, 5.0, 6.0].none?(Integer)).to be(true)
-    expect(%w[a b c d e f g].none?(String)).to be(false)
-    expect([1, true, ['hey', 2.4], 2.0].none?(String)).to be(true)
+    expect([1, 2, 3.7, 4.8, 5, 6].my_none?(Integer)).to be(false)
+    expect([2.0, 3.1, 5.0, 6.0].my_none?(Integer)).to be(true)
+    expect(%w[a b c d e f g].my_none?(String)).to be(false)
+    expect([1, true, ['hey', 2.4], 2.0].my_none?(String)).to be(true)
   end
   it 'returns true when no elements match the regex' do
     array = %w[one two three four five six seven]
-    expect(array.none?(/t/)).to be(false)
-    expect(array.none?(/p/)).to be(true)
+    expect(array.my_none?(/t/)).to be(false)
+    expect(array.my_none?(/p/)).to be(true)
   end
   it 'returns true when given a block and no elements evaluate to true' do
     array = %w[ant bear cat]
-    expect(array.none? { |word| word.length >= 4 }).to be(false)
-    expect(array.none? { |word| word.length >= 5 }).to be(true)
+    expect(array.my_none? { |word| word.length >= 4 }).to be(false)
+    expect(array.my_none? { |word| word.length >= 5 }).to be(true)
   end
   it 'returns true when no argument or block given in an empty array' do
-    expect([].none?).to be(true)
+    expect([].my_none?).to be(true)
   end
 end
