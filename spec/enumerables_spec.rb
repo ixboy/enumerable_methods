@@ -116,3 +116,30 @@ RSpec.describe '#my_all?' do
     expect([].my_all?).to be(true)
   end
 end
+
+RSpec.describe '#my_any?' do
+  it 'returns true with no block and at least one truthy elements' do
+    expect([true, true, nil, true, true].any?).to be(true)
+    expect([false, nil, false, false].any?).to be(false)
+    expect([true, true, 1, 2, 3, 4, 'hello'].any?).to be(true)
+  end
+  it 'returns true with class argument and any lements are members' do
+    expect([1, 2, 3.7, 4.8, 5, 6].any?(Integer)).to be(true)
+    expect([2.0, 3.1, 5.0, 6.0].any?(Integer)).to be(false)
+    expect(%w[a b c d e f g].any?(String)).to be(true)
+    expect([1, true, ['hey', 2.4], 2.0].any?(String)).to be(false)
+  end
+  it 'returns true when any elements match the regex' do
+    array = %w[one two three four five six seven]
+    expect(array.any?(/t/)).to be(true)
+    expect(array.any?(/p/)).to be(false)
+  end
+  it 'returns true when given a block any elements evaluate to true' do
+    array = %w[ant bear cat]
+    expect(array.any? { |word| word.length >= 4 }).to be(true)
+    expect(array.any? { |word| word.length >= 5 }).to be(false)
+  end
+  it 'returns false when no argument or block given in an empty array' do
+    expect([].any?).to be(false)
+  end
+end
