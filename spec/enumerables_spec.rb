@@ -6,7 +6,7 @@ RSpec.describe '#my_each' do
   it 'loops into an array and finds the sum' do
     array = [1, 2, 3, 4, 5]
     sum = 0
-    array.each do |number|
+    array.my_each do |number|
       sum += number
     end
     expect(sum).to eq(15)
@@ -14,7 +14,7 @@ RSpec.describe '#my_each' do
   it 'loops through an array and concatenates a String' do
     array = ['hello ', 'world ', 'how are you?']
     concat = ''
-    array.each do |word|
+    array.my_each do |word|
       concat += word
     end
     expect(concat).to eq('hello world how are you?')
