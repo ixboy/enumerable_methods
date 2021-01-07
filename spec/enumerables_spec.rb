@@ -92,9 +92,9 @@ end
 
 RSpec.describe '#my_all?' do
   it 'returns true with no block and no falsy elements' do
-    expect([true, true, nil, true, true].all?).to be(false)
-    expect([true, true, true, true, false, true].all?).to be(false)
-    expect([true, true, 1, 2, 3, 4, 'hello'].all?).to be(true)
+    expect([true, true, nil, true, true].my_all?).to be(false)
+    expect([true, true, true, true, false, true].my_all?).to be(false)
+    expect([true, true, 1, 2, 3, 4, 'hello'].my_all?).to be(true)
   end
   it 'returns true with class argument and all elements are members' do
     expect([1, 2, 3, 4, 5, 6].my_all?(Integer)).to be(true)

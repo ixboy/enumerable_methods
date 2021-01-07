@@ -1,17 +1,15 @@
 #!/usr/bin/env ruby
 
-# rubocop:disable Style/For
-
 module Enumerable
   def my_each
     return to_enum unless block_given?
 
+    # rubocop:disable Style/For
     for item in self
       yield(item)
     end
+    # rubocop:enable Style/For
   end
-
-  # rubocop:enable Style/For
 
   def my_each_with_index
     return to_enum unless block_given?
@@ -33,10 +31,16 @@ module Enumerable
     new_array
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def my_all?(pattern = nil)
     if pattern.nil?
       my_each do |item|
-        return false unless yield(item)
+        if block_given?
+          return false unless yield(item)
+        else
+          return false unless item
+        end
       end
     elsif pattern.is_a?(Class)
       my_each do |item|
@@ -49,6 +53,6 @@ module Enumerable
     end
     true
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 end
-
-# puts 'hello'.is_a?(String)
