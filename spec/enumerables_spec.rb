@@ -89,3 +89,30 @@ RSpec.describe '#my_select' do
     expect(enumerator).to be_a Enumerator
   end
 end
+
+RSpec.describe '#my_all?' do
+  it 'returns true with no block and no falsy elements' do
+    expect([true, true, nil, true, true].all?).to be(false)
+    expect([true, true, true, true, false, true].all?).to be(false)
+    expect([true, true, 1, 2, 3, 4, 'hello'].all?).to be(true)
+  end
+  it 'returns true with class argument and all elements are members' do
+    expect([1, 2, 3, 4, 5, 6].all?(Integer)).to be(true)
+    expect([1, 2.0, 3, 4, 5, 6].all?(Integer)).to be(false)
+    expect(%w[a b c d e f g].all?(String)).to be(true)
+    expect(['a', 'b', 1, 'c', 'd'].all?(String)).to be(false)
+  end
+  it 'returns true when all elements match the regex' do
+    array = %w[one two three four five six seven]
+    expect(array.all?(/t/)).to be(false)
+    expect(array.all?(/[aeiou]/)).to be(true)
+  end
+  it 'returns true when given a block all elements evaluate to true' do
+    array = %w[ant bear cat]
+    expect(array.all? { |word| word.length >= 3 }).to be(true)
+    expect(array.all? { |word| word.length >= 4 }).to be(false)
+  end
+  it 'returns true when no argument or block given in an empty array' do
+    expect([].all?).to be(true)
+  end
+end
