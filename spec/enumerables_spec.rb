@@ -109,10 +109,10 @@ RSpec.describe '#my_all?' do
   end
   it 'returns true when given a block all elements evaluate to true' do
     array = %w[ant bear cat]
-    expect(array.all? { |word| word.length >= 3 }).to be(true)
-    expect(array.all? { |word| word.length >= 4 }).to be(false)
+    expect(array.my_all? { |word| word.length >= 3 }).to be(true)
+    expect(array.my_all? { |word| word.length >= 4 }).to be(false)
   end
   it 'returns true when no argument or block given in an empty array' do
-    expect([].all?).to be(true)
+    expect([].my_all?).to be(true)
   end
 end

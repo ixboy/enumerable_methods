@@ -30,6 +30,15 @@ module Enumerable
     end
     new_array
   end
+
+  def my_all?
+    # return to_enum unless block_given?
+
+    my_each do |item|
+      return false unless yield(item)
+    end
+    true
+  end
 end
 
 # rubocop:enable Style/For
