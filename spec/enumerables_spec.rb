@@ -35,3 +35,43 @@ RSpec.describe '#my_each' do
     expect(returned).to be(range)
   end
 end
+
+RSpec.describe '#my_each_with_index' do
+  it 'loops into an array and finds the sum of array and max index' do
+    array = [5, 4, 3, 2, 1]
+    sum = 0
+    max_index = 0
+    array.each_with_index do |element, index|
+      sum += element
+      max_index = index >= max_index ? index : max_index
+    end
+    expect(sum).to eq(15)
+    expect(max_index).to eq(4)
+  end
+  it 'loops into an array and finds the concatenation of array and max index' do
+    array = ['hello ', 'beautiful ', 'world']
+    concatenation = ''
+    max_index = 0
+    array.each_with_index do |element, index|
+      concatenation += element
+      max_index = index >= max_index ? index : max_index
+    end
+    expect(concatenation).to eq('hello beautiful world')
+    expect(max_index).to eq(2)
+  end
+  it 'returns Enumerator if no block given' do
+    array = [10]
+    enumerator = array.each_with_index
+    expect(enumerator).to be_a Enumerator
+  end
+  it 'returns the array itself when block given' do
+    array = [10, 20, 30, 40, 50, 60]
+    returned = array.each_with_index {}
+    expect(returned).to be(array)
+  end
+  it 'returns an array with all the elements in range' do
+    range = (1..10)
+    returned = range.each_with_index {}
+    expect(returned).to be(range)
+  end
+end
