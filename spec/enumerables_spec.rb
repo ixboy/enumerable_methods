@@ -21,17 +21,17 @@ RSpec.describe '#my_each' do
   end
   it 'returns Enumerator if no block given' do
     array = [10]
-    enumerator = array.each
+    enumerator = array.my_each
     expect(enumerator).to be_a Enumerator
   end
   it 'returns the array itself when block given' do
     array = [10, 20, 30, 40, 50, 60]
-    returned = array.each {}
+    returned = array.my_each {}
     expect(returned).to be(array)
   end
   it 'returns an array with all the elements in range' do
     range = (1..10)
-    returned = range.each {}
+    returned = range.my_each {}
     expect(returned).to be(range)
   end
 end
