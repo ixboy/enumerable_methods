@@ -20,6 +20,16 @@ module Enumerable
       index += 1
     end
   end
+
+  def my_select
+    return to_enum unless block_given?
+
+    new_array = []
+    my_each do |item|
+      new_array << item if yield(item)
+    end
+    new_array
+  end
 end
 
 # rubocop:enable Style/For

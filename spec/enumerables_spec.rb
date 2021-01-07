@@ -80,7 +80,12 @@ RSpec.describe '#my_select' do
   it 'it filters the selected item in the array' do
     fruits = %w[mango banana apple orange]
     expected = 'mango'
-    favorites = fruits.select { |fruit| fruit == expected }
+    favorites = fruits.my_select { |fruit| fruit == expected }
     expect(favorites).to eq([expected])
+  end
+  it 'returns Enumerator if no block given' do
+    array = []
+    enumerator = array.my_select
+    expect(enumerator).to be_a Enumerator
   end
 end
