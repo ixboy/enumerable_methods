@@ -59,8 +59,8 @@ module Enumerable
       my_each do |item|
         if block_given?
           return true if yield(item)
-        else
-          return true if item
+        elsif item
+          return true
         end
       end
     elsif pattern.is_a?(Class)
