@@ -104,8 +104,8 @@ RSpec.describe '#my_all?' do
   end
   it 'returns true when all elements match the regex' do
     array = %w[one two three four five six seven]
-    expect(array.all?(/t/)).to be(false)
-    expect(array.all?(/[aeiou]/)).to be(true)
+    expect(array.my_all?(/t/)).to be(false)
+    expect(array.my_all?(/[aeiou]/)).to be(true)
   end
   it 'returns true when given a block all elements evaluate to true' do
     array = %w[ant bear cat]

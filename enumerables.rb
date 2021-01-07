@@ -11,6 +11,8 @@ module Enumerable
     end
   end
 
+  # rubocop:enable Style/For
+
   def my_each_with_index
     return to_enum unless block_given?
 
@@ -31,14 +33,16 @@ module Enumerable
     new_array
   end
 
-  def my_all?
-    # return to_enum unless block_given?
-
-    my_each do |item|
-      return false unless yield(item)
+  def my_all?(pattern = nil)
+    if pattern.nil?
+      my_each do |item|
+        return false unless yield(item)
+      end
+    elsif pattern.is_a?(Regexp)
+      my_each do |item|
+        return false unless pattern.match?(item)
+      end
     end
     true
   end
 end
-
-# rubocop:enable Style/For
