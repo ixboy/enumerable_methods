@@ -10,6 +10,15 @@ module Enumerable
       yield(item)
     end
   end
+
+  def my_each_with_index
+    return to_enum unless block_given?
+
+    length.times do |index|
+      yield(self[index], index)
+    end
+    self
+  end
 end
 
 # rubocop:enable Style/For
