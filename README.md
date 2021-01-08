@@ -1,16 +1,32 @@
-# Bubble Sort algorithm
+# Advanced building Blocks Enumerable Methods
 
-This is the ruby solution for the bubble sort algorithm. The goal is to sort an array of any type of data, making use of user defined criteria, with the aid of `yield`.
+This is the implementation of Ruby Methods, we build copies of 9 different types of Ruby Enumerable methods using Ruby and we tested all of them using RSpec, the objective of this is to showcase our abilities and capabilities of working with these methods and other Ruby methods as well and the abilities to create our own custom enumerable methods if there is a need for that.
+
+### This code includes the copies of 9 methods.
+* `each` method.
+* `each_with_index` method.
+* `select` method.
+* `all?` method.
+* `any?` method.
+* `none?` method.
+* `count` method.
+* `map` method.
+* `inject` method.
+
+#### & a method for tests
+###### - `multiply_els` method.
+
 
 ## Built With
 
-- Plain Ruby
+Ruby
+RSpec
 
-This project was built using plain Ruby.
+This project was built using Ruby & RSpec.
 
 ## How to test
 
-For testing this sorting algorithm, you need to install `rspec` using `gem`. You can find more about `gem` in the Ruby documentation.
+For testing this Enumerable methods, you need to install `rspec` using `gem`. You can find more about `gem` in the Ruby documentation.
 
 - Change to the repository directory: `cd ruby-1`
 - Run the tests using `rspec`: `rspec --tty spec`
