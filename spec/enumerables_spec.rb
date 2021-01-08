@@ -258,6 +258,13 @@ RSpec.describe '#my_map' do
     result = array.map # change this to my_map
     expect(result).to be_a Enumerator
   end
+  it 'returns a transformed array of numbers' do
+    transformation = proc { |n| n**4 }
+    array = [1, 2, 4, 2, 3, 6, 9, 11, 22, 34, 15]
+    result = array.my_map(transformation)
+    expected = array.map { |n| n**4 }
+    expect(result).to eq(expected)
+  end
 end
 
 RSpec.describe '#my_inject' do
@@ -268,21 +275,6 @@ RSpec.describe '#my_inject' do
     expect(result).to eq(expected)
     result = array.my_inject { |product, n| product * n }
     expected = array.reduce { |product, n| product * n }
-    expect(result).to eq(expected)
-  end
-  it 'works when proc is given' do
-    result = (5..10).inject(:+)
-    expected = (5..10).reduce(:+)
-    expect(result).to eq(expected)
-  end
-  it 'works when initial value and a proc is given' do
-    result = (5..10).inject(1, :*)
-    expected = (5..10).reduce(1, :*)
-    expect(result).to eq(expected)
-  end
-  it 'works when initial value and a block is given' do
-    result = (5..10).inject(1) { |product, n| product * n }
-    expected = (5..10).reduce(1) { |product, n| product * n }
     expect(result).to eq(expected)
   end
   it 'works find the longest word' do

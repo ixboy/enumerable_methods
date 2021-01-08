@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# rubocop:disable Metrics/ModuleLength
 module Enumerable
   def my_each
     return to_enum unless block_given?
@@ -100,12 +101,18 @@ module Enumerable
     count
   end
 
-  def my_map
-    return to_enum unless block_given?
-
+  def my_map(proc = (proc_not_defined = true))
     new_array = []
-    my_each do |item|
-      new_array << yield(item)
+    if proc_not_defined
+      return to_enum unless block_given?
+
+      my_each do |item|
+        new_array << yield(item)
+      end
+    elsif proc.is_a?(Proc)
+      my_each do |item|
+        new_array << proc.yield(item)
+      end
     end
     new_array
   end
@@ -119,6 +126,7 @@ module Enumerable
     accumulator
   end
 end
+# rubocop:enable Metrics/ModuleLength
 
 def multiply_els(parameter)
   parameter.my_inject { |accumulator, number| accumulator * number }
