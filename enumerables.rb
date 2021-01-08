@@ -98,6 +98,20 @@ module Enumerable
     end
     true
   end
+
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
+  def my_count(pattern = (pattern_not_defined = true))
+    count = 0
+    my_each do |item|
+      count += if block_given?
+                 yield(item) ? 1 : 0
+               elsif pattern_not_defined
+                 1
+               else
+                 item == pattern ? 1 : 0
+               end
+    end
+    count
+  end
 end
