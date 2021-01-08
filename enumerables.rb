@@ -61,8 +61,8 @@ module Enumerable
         return true if item.is_a?(pattern)
       elsif pattern.is_a?(Regexp)
         return true if pattern.match?(item)
-      else
-        return true if pattern == item
+      elsif pattern == item
+        return true
       end
     end
     false
@@ -78,8 +78,8 @@ module Enumerable
         return false if item.is_a?(pattern)
       elsif pattern.is_a?(Regexp)
         return false if pattern.match?(item)
-      else
-        return false if pattern == item
+      elsif pattern == item
+        return false
       end
     end
     true
