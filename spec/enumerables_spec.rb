@@ -239,3 +239,23 @@ RSpec.describe '#my_count' do
     expect([].my_count).to eq(0)
   end
 end
+
+RSpec.describe '#my_map' do
+  it 'returns a transformed array of numbers' do
+    array = [1, 2, 4, 2, 3, 6, 9, 11, 22, 34, 15]
+    result = array.map { |n| n**4 } # change this to my_map
+    expected = array.map { |n| n**4 }
+    expect(result).to eq(expected)
+  end
+  it 'returns a transformed array of strings' do
+    array = %w[apple mango banana kiwi coconut]
+    result = array.map { |w| "i like #{w}" } # change this to my_map
+    expected = array.map { |w| "i like #{w}" }
+    expect(result).to eq(expected)
+  end
+  it 'returns Enumerator when no block is given' do
+    array = %w[apple mango banana kiwi coconut]
+    result = array.map # change this to my_map
+    expect(result).to be_a Enumerator
+  end
+end
