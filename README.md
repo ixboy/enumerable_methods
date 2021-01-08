@@ -23,9 +23,9 @@ This is the implementation of Ruby Methods, we build copies of 9 different types
 
 
 ### Knowledge acquired during this project:
-* `Test-driven programming using RSpec`
-* `Implementation of several Ruby methods for Enumerable`
-* `Ability to navigate through Ruby documentation while coding`
+**Test-driven programming using RSpec**
+**Implementation of several Ruby methods for Enumerable**
+**Ability to navigate through Ruby documentation while coding**
 
 ## How to test
 
