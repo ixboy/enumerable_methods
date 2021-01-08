@@ -179,3 +179,24 @@ RSpec.describe '#my_none?' do
     expect([1, 2, 3, 4].my_none?).to be(false)
   end
 end
+
+RSpec.describe '#my_count' do
+  it 'returns the counted of the elements equal to argument' do
+    fruits = %w[mango banana apple apple orange]
+    expected = 2
+    favorites = fruits.count('apple')
+    expect(favorites).to eq(expected)
+  end
+  it 'Returns the number of items in enum through enumeration' do
+    ary = [1, 2, 4, 2]
+    expected = 4
+    result = ary.count
+    expect(result).to eq(expected)
+  end
+  it ' If a block is given, it counts the number of elements yielding a true value' do
+    ary = [1, 2, 4, 2]
+    # expected = 3
+    result = ary.count(&:even?)
+    expect(result).to eq(3)
+  end
+end
