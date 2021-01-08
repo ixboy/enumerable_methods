@@ -4,9 +4,11 @@ module Enumerable
   def my_each
     return to_enum unless block_given?
 
-    each do |item|
+    # rubocop:disable Style/For
+    for item in self
       yield(item)
     end
+    # rubocop:enable Style/For
   end
 
   def my_each_with_index
@@ -29,6 +31,8 @@ module Enumerable
     new_array
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def my_all?(pattern = (pattern_not_defined = true))
     my_each do |item|
       if block_given?
@@ -79,6 +83,8 @@ module Enumerable
     end
     true
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def my_count(pattern = (pattern_not_defined = true))
     count = 0
@@ -102,5 +108,14 @@ module Enumerable
       new_array << yield(item)
     end
     new_array
+  end
+
+  def my_inject
+    accumulator = self[0]
+    temporary = self[1..-1]
+    temporary.my_each do |item|
+      accumulator = yield(accumulator, item)
+    end
+    accumulator
   end
 end

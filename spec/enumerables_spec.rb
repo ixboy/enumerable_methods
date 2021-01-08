@@ -261,35 +261,37 @@ RSpec.describe '#my_map' do
 end
 
 RSpec.describe '#my_inject' do
-  it 'when block is given' do
-    array = [1, 2, 4, 2, 3, 6, 9, 11, 22, 34, 15]
-    result = array.inject { |product, n| product + n }
-    expected = array.reduce { |product, n| product + n }
+  it 'works when block is given' do
+    array = [0, 2, 4, 2, 3, 6, 9, 11, 22, 34, 15]
+    result = array.my_inject { |sum, n| sum + n }
+    expected = array.reduce { |sum, n| sum + n }
+    expect(result).to eq(expected)
+    result = array.my_inject { |product, n| product * n }
+    expected = array.reduce { |product, n| product * n }
     expect(result).to eq(expected)
   end
-  it 'when proc is given' do
+  it 'works when proc is given' do
     result = (5..10).inject(:+)
     expected = (5..10).reduce(:+)
     expect(result).to eq(expected)
   end
-  it 'when initial value and a proc is given' do
+  it 'works when initial value and a proc is given' do
     result = (5..10).inject(1, :*)
     expected = (5..10).reduce(1, :*)
     expect(result).to eq(expected)
   end
-  it 'when initial value and a block is given' do
+  it 'works when initial value and a block is given' do
     result = (5..10).inject(1) { |product, n| product * n }
     expected = (5..10).reduce(1) { |product, n| product * n }
     expect(result).to eq(expected)
   end
-  it 'find the longest word' do
-    result = %w[cat sheep bear].inject do |memo, word|
+  it 'works find the longest word' do
+    result = %w[cat sheep bear].my_inject do |memo, word|
       memo.length > word.length ? memo : word
     end
     expected = %w[cat sheep bear].reduce do |memo, word|
       memo.length > word.length ? memo : word
     end
-
     expect(result).to eq(expected)
   end
 end
