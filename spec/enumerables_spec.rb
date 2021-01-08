@@ -115,8 +115,20 @@ RSpec.describe '#my_all?' do
   it 'returns true when no argument or block given in an empty array' do
     expect([].my_all?).to be(true)
   end
-  it 'returns true when no block and nil or false argument' do
-    expect([1, 2, 3, 4].my_all?).to be(true)
+  it 'can handle case when no parameter, false or nil is given' do
+    array = [true, true, 'true', true, true]
+    expect(array.my_all?).to be(true)
+    expect(array.my_all?(nil)).to be(false)
+    expect(array.my_all?(false)).to be(false)
+    array.push(false)
+    expect(array.my_all?).to be(false)
+    expect(array.my_all?(nil)).to be(false)
+    expect(array.my_all?(false)).to be(false)
+    array.pop
+    array.push(nil)
+    expect(array.my_all?).to be(false)
+    expect(array.my_all?(nil)).to be(false)
+    expect(array.my_all?(false)).to be(false)
   end
 end
 
@@ -145,8 +157,20 @@ RSpec.describe '#my_any?' do
   it 'returns false when no argument or block given in an empty array' do
     expect([].my_any?).to be(false)
   end
-  it 'returns true when no block and nil or false argument' do
-    expect([1, 2, 3, 4].my_any?).to be(true)
+  it 'can handle case when no parameter, false or nil is given' do
+    array = [true, true, 'true', true, true]
+    expect(array.my_any?).to be(true)
+    expect(array.my_any?(nil)).to be(false)
+    expect(array.my_any?(false)).to be(false)
+    array.push(false)
+    expect(array.my_any?).to be(true)
+    expect(array.my_any?(nil)).to be(false)
+    expect(array.my_any?(false)).to be(true)
+    array.pop
+    array.push(nil)
+    expect(array.my_any?).to be(true)
+    expect(array.my_any?(nil)).to be(true)
+    expect(array.my_any?(false)).to be(false)
   end
 end
 
@@ -177,6 +201,21 @@ RSpec.describe '#my_none?' do
   end
   it 'returns false when no block and nil or false argument' do
     expect([1, 2, 3, 4].my_none?).to be(false)
+  end
+  it 'can handle case when no parameter, false or nil is given' do
+    array = [true, true, 'true', true, true]
+    expect(array.my_none?).to be(false)
+    expect(array.my_none?(nil)).to be(true)
+    expect(array.my_none?(false)).to be(true)
+    array.push(false)
+    expect(array.my_none?).to be(false)
+    expect(array.my_none?(nil)).to be(true)
+    expect(array.my_none?(false)).to be(false)
+    array.pop
+    array.push(nil)
+    expect(array.my_none?).to be(false)
+    expect(array.my_none?(nil)).to be(false)
+    expect(array.my_none?(false)).to be(true)
   end
 end
 

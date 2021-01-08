@@ -33,74 +33,59 @@ module Enumerable
 
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
-  def my_all?(pattern = (pattern_not_defined = true
-                         nil))
-    if pattern_not_defined
-      my_each do |item|
-        if block_given?
-          return false unless yield(item)
-        else
-          return false unless item
-        end
-      end
-    elsif pattern.is_a?(Class)
-      my_each do |item|
+  def my_all?(pattern = (pattern_not_defined = true))
+    my_each do |item|
+      if block_given?
+        return false unless yield(item)
+      elsif pattern_not_defined
+        return false unless item
+      elsif pattern.is_a?(Class)
         return false unless item.is_a?(pattern)
-      end
-    elsif pattern.is_a?(Regexp)
-      my_each do |item|
+      elsif pattern.is_a?(Regexp)
         return false unless pattern.match?(item)
+      else
+        return false unless pattern == item
       end
     end
     true
   end
 
-  def my_any?(pattern = (pattern_not_defined = true
-                         nil))
-    if pattern_not_defined
-      my_each do |item|
-        if block_given?
-          return true if yield(item)
-        elsif item
-          return true
-        end
-      end
-    elsif pattern.is_a?(Class)
-      my_each do |item|
+  def my_any?(pattern = (pattern_not_defined = true))
+    my_each do |item|
+      if block_given?
+        return true if yield(item)
+      elsif pattern_not_defined
+        return true if item
+      elsif pattern.is_a?(Class)
         return true if item.is_a?(pattern)
-      end
-    elsif pattern.is_a?(Regexp)
-      my_each do |item|
+      elsif pattern.is_a?(Regexp)
         return true if pattern.match?(item)
+      else
+        return true if pattern == item
       end
     end
     false
   end
 
-  def my_none?(pattern = (pattern_not_defined = true
-                          nil))
-    if pattern_not_defined
-      my_each do |item|
-        if block_given?
-          return false if yield(item)
-        elsif item
-          return false
-        end
-      end
-    elsif pattern.is_a?(Class)
-      my_each do |item|
+  def my_none?(pattern = (pattern_not_defined = true))
+    my_each do |item|
+      if block_given?
+        return false if yield(item)
+      elsif pattern_not_defined
+        return false if item
+      elsif pattern.is_a?(Class)
         return false if item.is_a?(pattern)
-      end
-    elsif pattern.is_a?(Regexp)
-      my_each do |item|
+      elsif pattern.is_a?(Regexp)
         return false if pattern.match?(item)
+      else
+        return false if pattern == item
       end
     end
     true
   end
-
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
+
   def my_count(pattern = (pattern_not_defined = true))
     count = 0
     my_each do |item|
