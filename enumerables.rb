@@ -33,8 +33,9 @@ module Enumerable
 
   # rubocop:disable Metrics/CyclomaticComplexity
   # rubocop:disable Metrics/PerceivedComplexity
-  def my_all?(pattern = nil)
-    if pattern.nil?
+  def my_all?(pattern = (pattern_not_defined = true
+                         nil))
+    if pattern_not_defined
       my_each do |item|
         if block_given?
           return false unless yield(item)
@@ -54,8 +55,9 @@ module Enumerable
     true
   end
 
-  def my_any?(pattern = nil)
-    if pattern.nil?
+  def my_any?(pattern = (pattern_not_defined = true
+                         nil))
+    if pattern_not_defined
       my_each do |item|
         if block_given?
           return true if yield(item)
@@ -75,8 +77,9 @@ module Enumerable
     false
   end
 
-  def my_none?(pattern = nil)
-    if pattern.nil?
+  def my_none?(pattern = (pattern_not_defined = true
+                          nil))
+    if pattern_not_defined
       my_each do |item|
         if block_given?
           return false if yield(item)

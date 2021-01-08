@@ -115,6 +115,9 @@ RSpec.describe '#my_all?' do
   it 'returns true when no argument or block given in an empty array' do
     expect([].my_all?).to be(true)
   end
+  it 'returns true when no block and nil or false argument' do
+    expect([1, 2, 3, 4].my_all?).to be(true)
+  end
 end
 
 RSpec.describe '#my_any?' do
@@ -142,6 +145,9 @@ RSpec.describe '#my_any?' do
   it 'returns false when no argument or block given in an empty array' do
     expect([].my_any?).to be(false)
   end
+  it 'returns true when no block and nil or false argument' do
+    expect([1, 2, 3, 4].my_any?).to be(true)
+  end
 end
 
 RSpec.describe '#my_none?' do
@@ -168,5 +174,8 @@ RSpec.describe '#my_none?' do
   end
   it 'returns true when no argument or block given in an empty array' do
     expect([].my_none?).to be(true)
+  end
+  it 'returns false when no block and nil or false argument' do
+    expect([1, 2, 3, 4].my_none?).to be(false)
   end
 end
