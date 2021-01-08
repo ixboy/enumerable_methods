@@ -295,3 +295,11 @@ RSpec.describe '#my_inject' do
     expect(result).to eq(expected)
   end
 end
+
+RSpec.describe '#multiply_els' do
+  it 'it multiplies all the elements in the array unsing my_inject' do
+    array = Array.new(rand(10..20)) { rand(25..255) }
+    correct = array.inject { |product, n| product * n }
+    expect(multiply_els(array)).to eq(correct)
+  end
+end

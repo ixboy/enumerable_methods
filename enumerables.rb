@@ -119,3 +119,7 @@ module Enumerable
     accumulator
   end
 end
+
+def multiply_els(parameter)
+  parameter.my_inject { |accumulator, number| accumulator * number }
+end
