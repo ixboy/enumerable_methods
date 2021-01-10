@@ -84,6 +84,23 @@ module Enumerable
     end
     true
   end
+
+  def my_inject(*parameters)
+    # Parameter discrimination logic
+    if parameters.length == 1
+      parameters[0].is_a?(Symbol) ? (symbol = parameters[0]) : (accumulator = parameters[0])
+    elsif parameters.length > 1
+      accumulator = parameters[0]
+      symbol = parameters[1]
+    end
+    temporary = accumulator.nil? ? drop(1) : drop(0)
+    accumulator = accumulator.nil? ? first(1)[0] : accumulator
+    # Implementation of the algorithm
+    temporary.my_each do |item|
+      accumulator = block_given? ? yield(accumulator, item) : symbol.to_proc.call(accumulator, item)
+    end
+    accumulator
+  end
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 
@@ -115,23 +132,6 @@ module Enumerable
       end
     end
     new_array
-  end
-
-  def my_inject(*parameters)
-    # Parameter discrimination logic
-    if parameters.length == 1
-      parameters[0].is_a?(Symbol) ? (symbol = parameters[0]) : (accumulator = parameters[0])
-    elsif parameters.length > 1
-      accumulator = parameters[0]
-      symbol = parameters[1]
-    end
-    temporary = accumulator.nil? ? drop(1) : drop(0)
-    accumulator = accumulator.nil? ? first(1)[0] : accumulator
-    # Implementation of the algorithm
-    temporary.my_each do |item|
-      accumulator = block_given? ? yield(accumulator, item) : symbol.to_proc.call(accumulator, item)
-    end
-    accumulator
   end
 end
 # rubocop:enable Metrics/ModuleLength
