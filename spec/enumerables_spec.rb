@@ -304,6 +304,10 @@ RSpec.describe '#my_inject' do
     end
     expect(result).to eq(expected)
   end
+  it 'raises a "LocalJumpError" when no block or argument is given' do
+    range = (5..10)
+    expect { range.my_inject }.to raise_error(LocalJumpError)
+  end
 end
 
 RSpec.describe '#multiply_els' do
