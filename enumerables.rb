@@ -97,7 +97,7 @@ module Enumerable
     accumulator = accumulator.nil? ? first(1)[0] : accumulator
     # Implementation of the algorithm
     temporary.my_each do |item|
-      accumulator = block_given? ? yield(accumulator, item) : symbol.to_proc.call(accumulator, item)
+      accumulator = symbol.nil? ? yield(accumulator, item) : symbol.to_proc.call(accumulator, item)
     end
     accumulator
   end
